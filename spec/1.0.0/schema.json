@@ -1,0 +1,137 @@
+{
+  "$id": "https://schemas.greenlight.ci/report/1.0.0/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Greenlight Report Schema",
+  "description": "JSON Schema for Greenlight Reports",
+  "definitions": {
+    "nonEmptyString": {
+      "type": "string",
+      "minLength": 1
+    },
+    "context": {
+      "position": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "line",
+          "column"
+        ],
+        "properties": {
+          "line": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "column": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      },
+      "file": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "type",
+          "path"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/definitions/nonEmptyString",
+            "title": "Type",
+            "description": "Context Type"
+          },
+          "path": {
+            "$ref": "#/definitions/nonEmptyString",
+            "title": "Path",
+            "description": "Path to file"
+          },
+          "start": {
+            "$ref": "#/definitions/context/position",
+            "title": "Start",
+            "description": "describe the start of the context"
+          },
+          "end": {
+            "$ref": "#/definitions/context/position",
+            "title": "End",
+            "description": "describe the end of the context"
+          }
+        }
+      }
+    }
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "plugin",
+    "issues"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "version": {
+      "title": "Schema Version",
+      "description": "Used to determine what Greenlight Report schema version to validate against",
+      "type": "string",
+      "pattern": "\\bv?(?:0|[1-9]\\d*)\\.(?:0|[1-9]\\d*)\\.(?:0|[1-9]\\d*)(?:-[\\da-z-]+(?:\\.[\\da-z-]+)*)?(?:\\+[\\da-z-]+(?:\\.[\\da-z-]+)*)?\\b"
+    },
+    "plugin": {
+      "$ref": "#/definitions/nonEmptyString",
+      "title": "Plugin Name",
+      "description": "Name of the plugin that generated this report"
+    },
+    "issues": {
+      "title": "Report issues",
+      "description": "List of found issues",
+      "type": "array",
+      "minItems": 0,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "name",
+          "severity",
+          "context"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/definitions/nonEmptyString",
+            "title": "Issue ID",
+            "description": "A unique, deterministic identifier for the specific issue"
+          },
+          "name": {
+            "$ref": "#/definitions/nonEmptyString",
+            "title": "Issue name",
+            "description": "Unique name representing the check that emitted this issue"
+          },
+          "description": {
+            "$ref": "#/definitions/nonEmptyString",
+            "title": "Issue Description",
+            "description": "Text snippet describing the issue in detail"
+          },
+          "severity": {
+            "title": "Issue Severity",
+            "description": "Describes the potential impact of the issue found",
+            "type": "string",
+            "enum": [
+              "info",
+              "minor",
+              "major",
+              "critical"
+            ]
+          },
+          "context": {
+            "title": "Issue Context",
+            "description": "Context for the issue",
+            "oneOf": [
+              { "$ref": "#/definitions/context/file" }
+            ]
+          }
+        }
+      }
+    }
+  }
+}
