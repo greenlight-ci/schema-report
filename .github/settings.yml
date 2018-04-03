@@ -1,6 +1,6 @@
 repository:
   name: schema-report
-  description: JSON Schema for Greenlight Reports
+  description: 📃 JSON Schema for Greenlight Reports
   topics: greenlight, schema, jsonschema, report
   homepage: https://greenlight.ci/
   private: false
