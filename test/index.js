@@ -1,7 +1,7 @@
 const { test } = require('tap')
 const Ajv = require('ajv')
 
-const { schema } = require('..')
+const schema = require('..')
 const json = require('./fixtures/report.json')
 const ajv = new Ajv()
 
