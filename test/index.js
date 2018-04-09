@@ -2,7 +2,7 @@ const { test } = require('tap')
 const Ajv = require('ajv')
 
 const schema = require('..')
-const json = require('./fixtures/report.json')
+const report = require('./fixtures/report.json')
 const ajv = new Ajv()
 
 test('schema compiles successfully', assert => {
@@ -15,5 +15,5 @@ test('schema compiles successfully', assert => {
 test('valid json file', assert => {
   assert.plan(1)
 
-  assert.ok(ajv.validate(schema, json))
+  assert.ok(ajv.validate(schema, report.issues[0]))
 })

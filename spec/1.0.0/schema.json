@@ -62,76 +62,44 @@
   "type": "object",
   "additionalProperties": false,
   "required": [
-    "version",
-    "plugin",
-    "issues"
+    "id",
+    "name",
+    "severity",
+    "context"
   ],
   "properties": {
-    "$schema": {
-      "type": "string"
-    },
-    "version": {
-      "title": "Schema Version",
-      "description": "Used to determine what Greenlight Report schema version to validate against",
-      "type": "string",
-      "pattern": "\\bv?(?:0|[1-9]\\d*)\\.(?:0|[1-9]\\d*)\\.(?:0|[1-9]\\d*)(?:-[\\da-z-]+(?:\\.[\\da-z-]+)*)?(?:\\+[\\da-z-]+(?:\\.[\\da-z-]+)*)?\\b"
-    },
-    "plugin": {
+    "id": {
       "$ref": "#/definitions/nonEmptyString",
-      "title": "Plugin Name",
-      "description": "Name of the plugin that generated this report"
+      "title": "Issue ID",
+      "description": "A unique, deterministic identifier for the specific issue"
     },
-    "issues": {
-      "title": "Report issues",
-      "description": "List of found issues",
-      "type": "array",
-      "minItems": 0,
-      "uniqueItems": true,
-      "items": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "id",
-          "name",
-          "severity",
-          "context"
-        ],
-        "properties": {
-          "id": {
-            "$ref": "#/definitions/nonEmptyString",
-            "title": "Issue ID",
-            "description": "A unique, deterministic identifier for the specific issue"
-          },
-          "name": {
-            "$ref": "#/definitions/nonEmptyString",
-            "title": "Issue name",
-            "description": "Unique name representing the check that emitted this issue"
-          },
-          "description": {
-            "$ref": "#/definitions/nonEmptyString",
-            "title": "Issue Description",
-            "description": "Text snippet describing the issue in detail"
-          },
-          "severity": {
-            "title": "Issue Severity",
-            "description": "Describes the potential impact of the issue found",
-            "type": "string",
-            "enum": [
-              "info",
-              "minor",
-              "major",
-              "critical"
-            ]
-          },
-          "context": {
-            "title": "Issue Context",
-            "description": "Context for the issue",
-            "oneOf": [
-              { "$ref": "#/definitions/context/file" }
-            ]
-          }
-        }
-      }
+    "name": {
+      "$ref": "#/definitions/nonEmptyString",
+      "title": "Issue name",
+      "description": "Unique name representing the check that emitted this issue"
+    },
+    "description": {
+      "$ref": "#/definitions/nonEmptyString",
+      "title": "Issue Description",
+      "description": "Text snippet describing the issue in detail"
+    },
+    "severity": {
+      "title": "Issue Severity",
+      "description": "Describes the potential impact of the issue found",
+      "type": "string",
+      "enum": [
+        "info",
+        "minor",
+        "major",
+        "critical"
+      ]
+    },
+    "context": {
+      "title": "Issue Context",
+      "description": "Context for the issue",
+      "oneOf": [
+        { "$ref": "#/definitions/context/file" }
+      ]
     }
   }
 }
