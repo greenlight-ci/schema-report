@@ -22,9 +22,9 @@ Reports are required to be served as `UTF-8` encoded `JSON` data, other encoding
 
 name        | type     | required | default | description                                
 ----------- | -------- | -------- | ------- | -------------------------------------------
-**version** | `String` | ✓        | `-`     | Spec version. Format must follow [semver][]
-**plugin**  | `String` | ✓        | `-`     | Report generating plugin name              
-**issues**  | `Object` | ✓        | `-`     | List of [found issues](#issues)            
+**version** | `String` | 🗸        | `-`     | Spec version. Format must follow [semver][]
+**plugin**  | `String` | 🗸        | `-`     | Report generating plugin name              
+**issues**  | `Object` | 🗸        | `-`     | List of [found issues](#issues)            
 
 ### `issues`
 
@@ -44,11 +44,11 @@ name        | type     | required | default | description
 
 name            | type     | required | default | description                                                                                                
 --------------- | -------- | -------- | ------- | -----------------------------------------------------------------------------------------------------------
-**id**          | `String` | ✓        | `-`     | A unique, deterministic identifier for the specific issue _(to allow users to exclude it in future scans)_ 
-**name**        | `String` | ✓        | `-`     | Unique name representing the check that emitted this issue                                                 
+**id**          | `String` | 🗸        | `-`     | A unique, deterministic identifier for the specific issue _(to allow users to exclude it in future scans)_ 
+**name**        | `String` | 🗸        | `-`     | Unique name representing the check that emitted this issue                                                 
 **description** | `String` | ✗        | `-`     | Text snippet describing the issue in detail. _(markdown accepted)_                                         
-**severity**    | `Enum`   | ✓        | `-`     | A Severity string (`info`, `minor`, `major`, `critical`) describing the potential impact of the issue found
-**context**     | `Object` | ✓        | `-`     | a [`context`](#context) object                                                                             
+**severity**    | `Enum`   | 🗸        | `-`     | A Severity string (`info`, `minor`, `major`, `critical`) describing the potential impact of the issue found
+**context**     | `Object` | 🗸        | `-`     | a [`context`](#context) object                                                                             
 
 ### `context`
 
@@ -63,8 +63,8 @@ name            | type     | required | default | description
 
 name      | type     | required | default | description                                                         
 --------- | -------- | -------- | ------- | --------------------------------------------------------------------
-**type**  | `Enum`   | ✓        | `-`     | Context type (`file`)                                               
-**path**  | `String` | ✓        | `-`     | Path to file relative to `/code`                                    
+**type**  | `Enum`   | 🗸        | `-`     | Context type (`file`)                                               
+**path**  | `String` | 🗸        | `-`     | Path to file relative to `/code`                                    
 **start** | `Object` | ✗        | `-`     | a [`position`](#position) object describing the start of the context
 **end**   | `Object` | ✗        | `-`     | a [`position`](#position) object describing the end of the context  
 
@@ -79,8 +79,8 @@ name      | type     | required | default | description
 
 name       | type     | required | default | description       
 ---------- | -------- | -------- | ------- | ------------------
-**line**   | `Number` | ✓        | `-`     | Line coordinates  
-**column** | `Number` | ✓        | `-`     | Column coordinates
+**line**   | `Number` | 🗸        | `-`     | Line coordinates  
+**column** | `Number` | 🗸        | `-`     | Column coordinates
 
 ---
 
